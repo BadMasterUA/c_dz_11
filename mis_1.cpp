@@ -13,6 +13,7 @@ class SimpleCircle{
     void SetRadius(double r) { itsRadius = r; } // мет. присвоения радиуса
 
     const SimpleCircle &operator++(); // меняем void, что бы возвращался объект
+    const SimpleCircle operator++(int); // пост инкримент с целым параметром
 
     private:
     double itsRadius; // переенная со значение радиуса
@@ -24,9 +25,17 @@ class SimpleCircle{
 SimpleCircle::SimpleCircle():itsRadius(0){};
 SimpleCircle::~SimpleCircle(){};
 
+//реализация инкримента
 const SimpleCircle& SimpleCircle::operator++(){
     ++itsRadius;
     return *this;
+}
+
+//реалицация пост инкримента
+const SimpleCircle SimpleCircle::operator++(int){
+    SimpleCircle temp(*this);
+    ++itsRadius;
+    return temp;
 }
 
 int main(){
@@ -40,7 +49,11 @@ int main(){
 
     SimpleCircle a = ++myCircle;
     cout << "Значение itsRadius a: " << a.GetRadius();
-    cout << " и myCircle: " << myCircle.GetRadius();
+    cout << " и myCircle: " << myCircle.GetRadius() << endl;
+
+    a = myCircle++;
+    cout << "Значение itsRadius a: " << a.GetRadius();
+    cout << " и myCircle: " << myCircle.GetRadius() << endl;;
 
     return 0;
 }
