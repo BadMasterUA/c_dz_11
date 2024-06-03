@@ -12,7 +12,7 @@ class SimpleCircle{
     double GetRadius() const { return itsRadius; } // мет. получения радиуса
     void SetRadius(double r) { itsRadius = r; } // мет. присвоения радиуса
 
-    void operator++() { ++itsRadius; }
+    const SimpleCircle &operator++(); // меняем void, что бы возвращался объект
 
     private:
     double itsRadius; // переенная со значение радиуса
@@ -21,8 +21,13 @@ class SimpleCircle{
 };
 
 //иницалализация конструкторов
-SimpleCircle::SimpleCircle():itsRadius(0), itsValue(0){};
+SimpleCircle::SimpleCircle():itsRadius(0){};
 SimpleCircle::~SimpleCircle(){};
+
+const SimpleCircle& SimpleCircle::operator++(){
+    ++itsRadius;
+    return *this;
+}
 
 int main(){
 
@@ -32,6 +37,10 @@ int main(){
     cout << "Значение itsRadius: " << myCircle.GetRadius() << endl;
     ++myCircle;
     cout << "Значение itsRadius: " << myCircle.GetRadius() << endl;
+
+    SimpleCircle a = ++myCircle;
+    cout << "Значение itsRadius a: " << a.GetRadius();
+    cout << " и myCircle: " << myCircle.GetRadius();
 
     return 0;
 }
