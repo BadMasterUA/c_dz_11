@@ -11,8 +11,7 @@ class Shape{
 class Rectangle:public Shape{
 
     public:
-    Rectangle();
-    Rectangle(int a, int b) { a = itsLength, b = itsWidth; }
+    Rectangle(int a, int b) : Shape() { a = itsLength, b = itsWidth; }
     ~Rectangle();
 
     int GetLength() { return itsLength; }
@@ -29,8 +28,7 @@ class Rectangle:public Shape{
 class Square:public Rectangle{
 
     public:
-    Square();
-    Square(int a) { a = itsLength; }
+    Square(int a) : Rectangle(a, 5), itsLength(a) {}
     ~Square();
 
     int GetLength() { return itsLength; }
